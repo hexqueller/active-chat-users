@@ -29,9 +29,10 @@ try:
             sock.send("PONG :tmi.twitch.tv\n".encode('utf-8'))
         
         elif "PRIVMSG" in response:
-            user = response.split('')[0][1:]
-            active_users.add(user)
-            print(f"Message from: {user}")
+            parts = response.split(' ')
+            username = parts[0].split(':')[1]
+            active_users.add(username)
+            print(f"Message from: {username}")
             print(f"Active users: {len(active_users)}")
 except KeyboardInterrupt:
     print("Disconnecting...")
